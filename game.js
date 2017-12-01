@@ -1,6 +1,6 @@
 
 // Initialize Phaser
-var game = new Phaser.Game(400, 490, Phaser.AUTO, 'game_div');
+var game = new Phaser.Game(400, 450, Phaser.AUTO, 'game_div');
 
 // Our 'score' global variable
 var score_old = 0;

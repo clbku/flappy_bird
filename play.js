@@ -7,7 +7,7 @@ var play_state = {
         space_key.onDown.add(this.jump, this); 
 
         this.pipes = game.add.group();
-        this.pipes.createMultiple(20, 'pipe');  
+        this.pipes.createMultiple(20, 'mid-pipe');  
         this.timer = this.game.time.events.loop(1500, this.add_row_of_pipes, this);           
 
         this.bird = this.game.add.sprite(100, 245, 'bird');
@@ -20,6 +20,7 @@ var play_state = {
         this.label_score = this.game.add.text(20, 20, "0", style); 
 
         this.jump_sound = this.game.add.audio('jump');
+        this.collision_sound = this.game.add.audio('collision');
     },
 
     update: function() {
@@ -46,6 +47,7 @@ var play_state = {
             return;
 
         this.bird.alive = false;
+        this.collision_sound.play();
         this.game.time.events.remove(this.timer);
 
         this.pipes.forEachAlive(function(p){
@@ -70,9 +72,9 @@ var play_state = {
     add_row_of_pipes: function() {
         var hole = Math.floor(Math.random()*5)+1;
 
-        for (var i = 0; i < 8; i++)
-            if (i != hole && i != hole +1) 
-                this.add_one_pipe(400, i*60+10);   
+        for (var i = 0; i < 9; i++)
+            if (i != hole && i != hole +1 && i!= hole + 2) 
+                this.add_one_pipe(400, i*50);   
 
         // No 'this.score', but just 'score'
         score_new += 1; 
